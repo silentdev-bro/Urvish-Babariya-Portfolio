@@ -156,6 +156,57 @@ public class SystemController {
   );
 }
 
+function ShootingStars() {
+  const count = 30;
+  const meshRef = useRef<THREE.InstancedMesh>(null);
+  const dummy = useMemo(() => new THREE.Object3D(), []);
+  
+  const stars = useMemo(() => {
+    return Array.from({ length: count }, () => ({
+      x: (Math.random() - 0.5) * 50,
+      y: Math.random() * 50 + 10,
+      z: (Math.random() - 0.5) * 30 - 15,
+      speed: Math.random() * 20 + 20,
+      scale: Math.random() * 1.5 + 0.5
+    }));
+  }, []);
+
+  useFrame((state, delta) => {
+    if (!meshRef.current) return;
+    
+    stars.forEach((star, i) => {
+      // Move diagonally down-left
+      star.x -= star.speed * delta * 0.5;
+      star.y -= star.speed * delta;
+      
+      // Reset if it goes too far down
+      if (star.y < -10) {
+        star.x = (Math.random() - 0.5) * 50 + 15;
+        star.y = Math.random() * 40 + 20;
+        star.speed = Math.random() * 20 + 20;
+      }
+      
+      dummy.position.set(star.x, star.y, star.z);
+      // Elongate to create a "streak" effect
+      dummy.scale.set(0.03, star.scale * 2, 0.03);
+      // Angle to match the trajectory
+      dummy.rotation.z = Math.atan2(1, 0.5); 
+      dummy.updateMatrix();
+      
+      meshRef.current.setMatrixAt(i, dummy.matrix);
+    });
+    
+    meshRef.current.instanceMatrix.needsUpdate = true;
+  });
+
+  return (
+    <instancedMesh ref={meshRef} args={[undefined as any, undefined as any, count]}>
+      <cylinderGeometry args={[1, 1, 1, 4]} />
+      <meshBasicMaterial color="#ffffff" transparent opacity={0.3} />
+    </instancedMesh>
+  );
+}
+
 function DataParticles() {
   const count = 150;
   const positions = useMemo(() => {
@@ -212,6 +263,7 @@ export function HeroScene3D() {
           <SmoothCoder />
           <HolographicScreens />
           <DataParticles />
+          <ShootingStars />
           
           {/* Infinite Grid Floor */}
           <Grid 
