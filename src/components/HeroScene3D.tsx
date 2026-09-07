@@ -166,7 +166,7 @@ function ShootingStars() {
       x: (Math.random() - 0.5) * 50,
       y: Math.random() * 50 + 10,
       z: (Math.random() - 0.5) * 30 - 15,
-      speed: Math.random() * 20 + 20,
+      speed: Math.random() * 3 + 2, // SLOW DOWN: 2 to 5 units per sec
       scale: Math.random() * 1.5 + 0.5
     }));
   }, []);
@@ -184,14 +184,14 @@ function ShootingStars() {
       if (star.y < -10) {
         star.x = (Math.random() - 0.5) * 50 + 15;
         star.y = Math.random() * 40 + 20;
-        star.speed = Math.random() * 20 + 20;
+        star.speed = Math.random() * 3 + 2;
       }
       
       dummy.position.set(star.x, star.y, star.z);
       // Elongate to create a "streak" effect
-      dummy.scale.set(0.03, star.scale * 2, 0.03);
-      // Angle to match the trajectory
-      dummy.rotation.z = Math.atan2(1, 0.5); 
+      dummy.scale.set(0.015, star.scale * 1.5, 0.015);
+      // Tilt 26.5 degrees to match the 0.5x / 1y movement ratio
+      dummy.rotation.z = Math.PI / 6.5; 
       dummy.updateMatrix();
       
       mesh.setMatrixAt(i, dummy.matrix);
@@ -202,8 +202,8 @@ function ShootingStars() {
 
   return (
     <instancedMesh ref={meshRef} args={[undefined as any, undefined as any, count]}>
-      <cylinderGeometry args={[1, 1, 1, 4]} />
-      <meshBasicMaterial color="#ffffff" transparent opacity={0.3} />
+      <cylinderGeometry args={[1, 1, 1, 8]} />
+      <meshBasicMaterial color="#4FD1FF" transparent opacity={0.6} />
     </instancedMesh>
   );
 }
