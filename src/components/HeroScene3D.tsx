@@ -209,6 +209,45 @@ function ShootingStars() {
   );
 }
 
+function MathEquations() {
+  const equations = [
+    // Probability & Statistics: Bayes' Theorem
+    { text: "P(A|B) = P(B|A)P(A) / P(B)", position: [-3.5, 2.5, -2], color: "#4FD1FF", speed: 1.5 },
+    // Probability & Statistics: Gaussian Distribution
+    { text: "f(x) = (1 / σ√(2π)) e^(-(x-μ)² / 2σ²)", position: [3.5, 3.0, -3], color: "#F2B84B", speed: 2 },
+    // Optimization: Gradient Descent Update Rule
+    { text: "θ = θ - α ∇J(θ)", position: [-4, 0.5, -1.5], color: "#4C7EFF", speed: 2.2 },
+    // Linear Algebra: Singular Value Decomposition (SVD)
+    { text: "A = U Σ Vᵀ", position: [4, 1.0, -1], color: "#4FD1FF", speed: 1.8 },
+    // Linear Algebra: Eigenvalue Equation
+    { text: "Ax = λx", position: [-2, 3.5, -4], color: "#F2B84B", speed: 2.5 },
+    // Time Series Analysis: ARMA Model
+    { text: "X_t = c + ε_t + Σ φ_i X_{t-i} + Σ θ_i ε_{t-i}", position: [2.5, 3.8, -3.5], color: "#4C7EFF", speed: 1.7 }
+  ];
+
+  return (
+    <group>
+      {equations.map((eq, i) => (
+        <Float key={i} speed={eq.speed} rotationIntensity={0.2} floatIntensity={0.5}>
+          <Text
+            position={eq.position as [number, number, number]}
+            fontSize={0.25}
+            color={eq.color}
+            anchorX="center"
+            anchorY="middle"
+            fillOpacity={0.8}
+            outlineWidth={0.01}
+            outlineColor={eq.color}
+            outlineOpacity={0.4}
+          >
+            {eq.text}
+          </Text>
+        </Float>
+      ))}
+    </group>
+  );
+}
+
 function DataParticles() {
   const count = 150;
   const positions = useMemo(() => {
@@ -264,6 +303,7 @@ export function HeroScene3D() {
           
           <SmoothCoder />
           <HolographicScreens />
+          <MathEquations />
           <DataParticles />
           <ShootingStars />
           
