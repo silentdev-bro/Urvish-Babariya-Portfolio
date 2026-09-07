@@ -180,7 +180,7 @@ function DataParticles() {
   return (
     <points ref={pointsRef}>
       <bufferGeometry>
-        <bufferAttribute attach="attributes-position" count={count} array={positions} itemSize={3} />
+        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
       <pointsMaterial size={0.04} color="#4FD1FF" transparent opacity={0.5} sizeAttenuation />
     </points>

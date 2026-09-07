@@ -19,7 +19,7 @@ import {
   SiC
 } from "react-icons/si";
 
-const ICON_MAP: Record<string, React.ElementType> = {
+const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   "C++": SiCplusplus,
   "C": SiC,
   "Python": SiPython,
