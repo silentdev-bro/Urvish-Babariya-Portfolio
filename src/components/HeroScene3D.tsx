@@ -172,7 +172,8 @@ function ShootingStars() {
   }, []);
 
   useFrame((state, delta) => {
-    if (!meshRef.current) return;
+    const mesh = meshRef.current;
+    if (!mesh) return;
     
     stars.forEach((star, i) => {
       // Move diagonally down-left
@@ -193,10 +194,10 @@ function ShootingStars() {
       dummy.rotation.z = Math.atan2(1, 0.5); 
       dummy.updateMatrix();
       
-      meshRef.current.setMatrixAt(i, dummy.matrix);
+      mesh.setMatrixAt(i, dummy.matrix);
     });
     
-    meshRef.current.instanceMatrix.needsUpdate = true;
+    mesh.instanceMatrix.needsUpdate = true;
   });
 
   return (
