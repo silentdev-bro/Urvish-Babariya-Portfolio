@@ -77,23 +77,23 @@ export function CursorSpotlight() {
       >
         <motion.div
           className="absolute top-0 left-0 rounded-full bg-mist"
-          style={{ width: 80, height: 80, x: x1, y: y1, translateX: "-50%", translateY: "-50%" }}
+          style={{ width: 40, height: 40, x: x1, y: y1, translateX: "-50%", translateY: "-50%" }}
         />
         <motion.div
           className="absolute top-0 left-0 rounded-full bg-mist"
-          style={{ width: 64, height: 64, x: x2, y: y2, translateX: "-50%", translateY: "-50%" }}
+          style={{ width: 32, height: 32, x: x2, y: y2, translateX: "-50%", translateY: "-50%" }}
         />
         <motion.div
           className="absolute top-0 left-0 rounded-full bg-mist"
-          style={{ width: 48, height: 48, x: x3, y: y3, translateX: "-50%", translateY: "-50%" }}
+          style={{ width: 24, height: 24, x: x3, y: y3, translateX: "-50%", translateY: "-50%" }}
         />
         <motion.div
           className="absolute top-0 left-0 rounded-full bg-mist"
-          style={{ width: 32, height: 32, x: x4, y: y4, translateX: "-50%", translateY: "-50%" }}
+          style={{ width: 16, height: 16, x: x4, y: y4, translateX: "-50%", translateY: "-50%" }}
         />
         <motion.div
           className="absolute top-0 left-0 rounded-full bg-mist"
-          style={{ width: 24, height: 24, x: x5, y: y5, translateX: "-50%", translateY: "-50%" }}
+          style={{ width: 12, height: 12, x: x5, y: y5, translateX: "-50%", translateY: "-50%" }}
         />
       </div>
     </>
