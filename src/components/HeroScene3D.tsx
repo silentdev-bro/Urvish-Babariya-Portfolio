@@ -211,18 +211,13 @@ function ShootingStars() {
 
 function MathEquations() {
   const equations = [
-    // Probability & Statistics: Bayes' Theorem
-    { text: "P(A|B) = P(B|A)P(A) / P(B)", position: [-4.5, 1.2, -2], color: "#4FD1FF", speed: 1.5 },
-    // Probability & Statistics: Gaussian Distribution
-    { text: "f(x) = (1 / σ√(2π)) e^(-(x-μ)² / 2σ²)", position: [-2.5, 1.8, -3], color: "#F2B84B", speed: 2 },
-    // Optimization: Gradient Descent Update Rule
-    { text: "θ = θ - α ∇J(θ)", position: [-5.0, 0.0, -1.5], color: "#4C7EFF", speed: 2.2 },
-    // Linear Algebra: Singular Value Decomposition (SVD)
-    { text: "A = U Σ Vᵀ", position: [-3.0, 0.5, -1], color: "#4FD1FF", speed: 1.8 },
-    // Linear Algebra: Eigenvalue Equation
-    { text: "Ax = λx", position: [-1.5, -0.5, -2.5], color: "#F2B84B", speed: 2.5 },
-    // Time Series Analysis: ARMA Model
-    { text: "X_t = c + ε_t + Σ φ_i X_{t-i} + Σ θ_i ε_{t-i}", position: [-4.0, -1.0, -3.5], color: "#4C7EFF", speed: 1.7 }
+    // Pushed deep into the Z-axis so they are faded/blurred by the scene fog
+    { text: "P(A|B) = P(B|A)P(A) / P(B)", position: [-8.5, 2.5, -8], color: "#4FD1FF", speed: 1.5 },
+    { text: "f(x) = (1 / σ√(2π)) e^(-(x-μ)² / 2σ²)", position: [-5.5, 3.5, -10], color: "#F2B84B", speed: 2 },
+    { text: "θ = θ - α ∇J(θ)", position: [-9.0, 0.5, -7], color: "#4C7EFF", speed: 2.2 },
+    { text: "A = U Σ Vᵀ", position: [-6.0, 1.5, -6], color: "#4FD1FF", speed: 1.8 },
+    { text: "Ax = λx", position: [-4.0, -1.0, -9], color: "#F2B84B", speed: 2.5 },
+    { text: "X_t = c + ε_t + Σ φ_i X_{t-i} + Σ θ_i ε_{t-i}", position: [-7.0, -2.0, -11], color: "#4C7EFF", speed: 1.7 }
   ];
 
   return (
@@ -231,14 +226,14 @@ function MathEquations() {
         <Float key={i} speed={eq.speed} rotationIntensity={0.2} floatIntensity={0.5}>
           <Text
             position={eq.position as [number, number, number]}
-            fontSize={0.25}
+            fontSize={0.6} // Increased to compensate for being further back
             color={eq.color}
             anchorX="center"
             anchorY="middle"
-            fillOpacity={0.8}
+            fillOpacity={0.2} // Heavily lowered to make them faint
             outlineWidth={0.01}
             outlineColor={eq.color}
-            outlineOpacity={0.4}
+            outlineOpacity={0.05}
           >
             {eq.text}
           </Text>
