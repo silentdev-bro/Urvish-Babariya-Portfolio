@@ -163,10 +163,10 @@ function ShootingStars() {
   
   const stars = useMemo(() => {
     return Array.from({ length: count }, () => ({
-      x: (Math.random() - 0.5) * 50,
-      y: Math.random() * 50 + 10,
+      x: (Math.random() - 0.5) * 60 - 10, // Spawn more towards the left
+      y: Math.random() * 50 + 10,         // Spawn high up
       z: (Math.random() - 0.5) * 30 - 15,
-      speed: Math.random() * 3 + 2, // SLOW DOWN: 2 to 5 units per sec
+      speed: Math.random() * 3 + 2, // 2 to 5 units per sec
       scale: Math.random() * 1.5 + 0.5
     }));
   }, []);
@@ -176,22 +176,23 @@ function ShootingStars() {
     if (!mesh) return;
     
     stars.forEach((star, i) => {
-      // Move diagonally down-left
-      star.x -= star.speed * delta * 0.5;
-      star.y -= star.speed * delta;
+      // Move diagonally DOWN and RIGHT
+      star.x += star.speed * delta * 0.8; // Move RIGHT
+      star.y -= star.speed * delta;       // Move DOWN
       
-      // Reset if it goes too far down
-      if (star.y < -10) {
-        star.x = (Math.random() - 0.5) * 50 + 15;
-        star.y = Math.random() * 40 + 20;
+      // Reset if it goes too far down or too far right
+      if (star.y < -15 || star.x > 30) {
+        star.x = (Math.random() - 0.5) * 40 - 20; // Spawn back on the left (-40 to 0)
+        star.y = Math.random() * 40 + 20;         // Spawn high (20 to 60)
         star.speed = Math.random() * 3 + 2;
       }
       
       dummy.position.set(star.x, star.y, star.z);
       // Elongate to create a "streak" effect
       dummy.scale.set(0.015, star.scale * 1.5, 0.015);
-      // Tilt 26.5 degrees to match the 0.5x / 1y movement ratio
-      dummy.rotation.z = Math.PI / 6.5; 
+      
+      // Tilt to the RIGHT (negative Z rotation) to match the exact (0.8x, -1y) trajectory
+      dummy.rotation.z = -Math.atan2(0.8, 1); 
       dummy.updateMatrix();
       
       mesh.setMatrixAt(i, dummy.matrix);
