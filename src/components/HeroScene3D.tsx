@@ -235,8 +235,6 @@ function MathEquations() {
             outlineWidth={0.01}
             outlineColor={eq.color}
             outlineOpacity={0.1}
-            // Using a standard elegant serif font for math (Lora)
-            font="https://fonts.gstatic.com/s/lora/v35/0QI6MX1D_JOuGQbT0gvTJPa787weuyJGmKxum0s.woff"
           >
             {eq.text}
           </Text>
