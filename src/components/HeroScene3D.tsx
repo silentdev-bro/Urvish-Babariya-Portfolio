@@ -214,11 +214,11 @@ function MathEquations() {
     // Probability
     { text: "P(A|B) = P(B|A)P(A) / P(B)", position: [-6.5, 2.5, -2], color: "#4FD1FF", speed: 1.5 },
     // Statistics
-    { text: "f(x) = (1 / σ√(2π)) exp(-½((x-μ)/σ)²)", position: [-5.5, 3.5, -1], color: "#F2B84B", speed: 2 },
-    // Linear Algebra (SVD - using V* instead of Vᵀ to prevent missing character boxes)
-    { text: "A = UΣV*", position: [-5.0, 1.5, 0], color: "#4FD1FF", speed: 1.8 },
+    { text: "f(x) = (1 / (sigma * sqrt(2pi))) * exp(-0.5 * ((x-mu)/sigma)^2)", position: [-5.5, 3.5, -1], color: "#F2B84B", speed: 2 },
+    // Linear Algebra (SVD)
+    { text: "A = U * Sigma * V*", position: [-5.0, 1.5, 0], color: "#4FD1FF", speed: 1.8 },
     // Linear Algebra (Eigenvalue)
-    { text: "Ax = λx", position: [-4.0, -1.0, 1], color: "#F2B84B", speed: 2.5 }
+    { text: "A * x = lambda * x", position: [-4.0, -1.0, 1], color: "#F2B84B", speed: 2.5 }
   ];
 
   return (
@@ -227,7 +227,7 @@ function MathEquations() {
         <Float key={i} speed={eq.speed} rotationIntensity={0.2} floatIntensity={0.5}>
           <Text
             position={eq.position as [number, number, number]}
-            fontSize={0.4}
+            fontSize={0.3}
             color={eq.color}
             anchorX="center"
             anchorY="middle"
@@ -235,8 +235,6 @@ function MathEquations() {
             outlineWidth={0.01}
             outlineColor={eq.color}
             outlineOpacity={0.1}
-            // Using a standard elegant serif font for math (Lora)
-            font="https://fonts.gstatic.com/s/lora/v35/0QI6MX1D_JOuGQbT0gvTJPa787weuyJGmKxum0s.woff"
           >
             {eq.text}
           </Text>
