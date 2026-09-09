@@ -14,7 +14,7 @@ export const resume = {
     {
       school: "Dhirubhai Ambani University",
       degree: "B.Tech in Information and Communication Technology",
-      score: null,
+      score: "CPI: 7.53/10",
       period: "2024 – Present",
       location: "Gandhinagar, Gujarat",
     },
@@ -47,12 +47,12 @@ export const resume = {
   projects: [
     {
       name: "PharmaChain",
-      stack: ["Spring Boot", "PostgreSQL", "Spring Security", "Spring AI", "Docker"],
+      stack: ["React", "Spring Boot 3", "PostgreSQL", "Spring AI", "Docker"],
       bullets: [
-        "Architected an enterprise-grade, 3-tier pharmaceutical supply chain backend using Spring Boot, replacing application-level checks with impenetrable PostgreSQL triggers to strictly enforce FDA compliance rules.",
-        "Integrated an AI Compliance Copilot via Spring AI, combining local Ollama embeddings and pgvector for RAG-based live-database Q&A and automated regulatory recall generation.",
-        "Secured 100+ REST endpoints with JWT and 6-role RBAC, while maintaining an immutable, SHA-256 cryptographic audit ledger directly in the database.",
-        "Established CI/CD pipelines via GitHub Actions and Testcontainers, leading architecture reviews that resolved critical JPA data-integrity defects.",
+        "Engineered a full-stack pharmaceutical supply chain platform using React/TypeScript and a Spring Boot 3 REST API, leveraging PostgreSQL triggers to enforce strict FDA-style drug compliance.",
+        "Secured endpoints via JWT authentication (5-role RBAC) with compliant e-signatures; engineered an append-only SHA-256 cryptographic audit ledger to ensure immutable record-keeping.",
+        "Developed a Spring AI compliance copilot combining RAG (via pgvector & Ollama) for regulatory documents with Groq LLM tool-calling to enable natural language querying of live inventory data.",
+        "Integrated IoT cold-chain telemetry for real-time monitoring, and validated database logic using Testcontainers with CI/CD pipelines managed via GitHub Actions and Docker.",
       ],
       github: "https://github.com/Urvish2007/PharmaChain-DB", 
       demo: null,
