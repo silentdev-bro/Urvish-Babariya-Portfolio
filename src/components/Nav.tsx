@@ -67,11 +67,12 @@ export function Nav() {
             </div>
             <div className="w-px h-4 bg-haze/30" />
             <a
-              href="/resume.pdf"
-              download
+              href="/Urvish_Babariya_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="font-medium text-sm bg-mist text-ink px-4 py-1.5 rounded-full hover:bg-ascent-1 hover:text-mist transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ascent-1"
             >
-              Résumé
+              Resume / CV
             </a>
           </div>
 
@@ -109,11 +110,12 @@ export function Nav() {
           </a>
         ))}
         <a
-          href="/resume.pdf"
-          download
+          href="/Urvish_Babariya_Resume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
           className="text-center font-medium text-sm bg-mist text-ink px-4 py-3 rounded-xl mt-2"
         >
-          Download Résumé
+          Download Resume / CV
         </a>
       </motion.div>
     </header>
