@@ -6,14 +6,18 @@ import { GlassPanel } from "./GlassPanel";
 import { ExternalLink, ChevronLeft, ChevronRight, Database, Server, GitMerge, Cpu, Activity, Layers, Layout, Zap } from "lucide-react";
 import { FaGithub as Github } from "react-icons/fa";
 import { cn } from "@/lib/utils";
+import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 
 export function ProjectsCarousel() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    align: "start",
-    loop: false,
-    skipSnaps: false,
-    dragFree: true,
-  });
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      align: "start",
+      loop: false,
+      skipSnaps: false,
+      dragFree: true,
+    },
+    [WheelGesturesPlugin({ forceWheelAxis: "y" })]
+  );
   
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
