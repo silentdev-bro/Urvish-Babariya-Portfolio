@@ -37,10 +37,10 @@ export const resume = {
   coursework: [
     "Data Structures",
     "Design & Analysis of Algorithms",
-    "Computer Networks",
     "Computer Systems Programming",
     "Database Management Systems",
     "Object-Oriented Programming (OOP)",
+    "Operating Systems",
     "Software Engineering",
   ],
 
@@ -59,14 +59,13 @@ export const resume = {
       flagship: true,
     },
     {
-      name: "Classic Tetris Game",
-      stack: ["C++", "OOP", "Data Structures", "Windows API"],
+      name: "LatencyBook",
+      stack: ["C++20", "Lock-Free Concurrency", "OS Internals"],
       bullets: [
-        "Engineered a fully playable, terminal-based Tetris game in C++ utilizing the Windows Console API for dynamic cursor manipulation, real-time keyboard polling, and color rendering.",
-        "Designed a robust OOP architecture featuring independent Tetromino and GameState classes to cleanly manage 2D matrix rotations, collision detection, and dynamic grid updates.",
-        "Implemented a scalable game loop with precise timing (`<chrono>`) and progressive difficulty scaling based on score thresholds and lines cleared.",
+        "Engineered a low-latency limit order book and alpha-signal engine in C++20, replacing malloc/mutex-based structures with a custom pool allocator and lock-free SPSC ring buffer, cutting allocation cost by 5.6x (9.81ns → 1.76ns) and queue push/pop latency by 36.6x (38.4ns → 1.05ns).",
+        "Achieved a fully allocation-free hot path (machine-verified) with O(1) order-book operations (21.5ns add/cancel cycle) and 11.8x faster memory access via 2MB huge pages, driving a full pipeline tick-to-trade latency of 312ns (p50); validated by 40/40 tests under ThreadSanitizer and ASan/UBSan in CI."
       ],
-      github: "https://github.com/Urvish2007/OOPs-Classic-Tetris-Game", 
+      github: "https://github.com/Urvish2007", 
       demo: null,
       flagship: false,
     },
@@ -85,10 +84,11 @@ export const resume = {
   ],
 
   skills: {
-    "Languages": ["Java", "C", "C++", "SQL", "Python"],
+    "Languages": ["Java", "C", "C++/C++20", "SQL", "Python"],
     "Backend & Frameworks": ["Spring Boot", "Spring Security", "Spring Data JPA", "Hibernate", "RESTful APIs", "Microservices"],
     "AI & Data": ["Spring AI", "LangChain", "LangGraph", "Gradio", "RAG Pipelines", "AI Agents (ReAct)"],
-    "DevOps, Tools & Testing": ["Git", "Docker", "GitHub Actions (CI/CD)", "Maven", "JWT", "Postman", "JUnit", "Testcontainers"],
+    "Low-Latency & Systems": ["Lock-Free Concurrency", "Multithreading", "Memory/Pool Allocators", "OS Internals", "Google Benchmark"],
+    "DevOps, Tools & Testing": ["Git", "Docker", "GitHub Actions (CI/CD)", "CMake", "Maven", "JWT", "Postman", "JUnit", "GoogleTest", "Testcontainers", "ThreadSanitizer/AddressSanitizer"],
     "Databases": ["PostgreSQL", "MySQL", "pgvector", "ChromaDB (Vector DB)"],
     "Soft Skills": ["Team Collaboration", "Leadership", "Problem Solving", "Communication"],
   },
