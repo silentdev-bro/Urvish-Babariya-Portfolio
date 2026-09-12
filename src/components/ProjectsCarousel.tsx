@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { resume } from "@/data/resume";
 import { GlassPanel } from "./GlassPanel";
-import { ExternalLink, ChevronLeft, ChevronRight, Database, Server, GitMerge } from "lucide-react";
+import { ExternalLink, ChevronLeft, ChevronRight, Database, Server, GitMerge, Cpu, Activity, Layers, Layout, Zap } from "lucide-react";
 import { FaGithub as Github } from "react-icons/fa";
 import { cn } from "@/lib/utils";
 
@@ -44,6 +44,70 @@ export function ProjectsCarousel() {
       emblaApi.off("reInit", onScroll);
     };
   }, [emblaApi, onScroll]);
+
+  const renderDiagram = (projectName: string) => {
+    if (projectName === "PharmaChain") {
+      return (
+        <>
+          <div className="w-full flex items-center justify-center p-4 liquid-glass rounded-lg border border-ascent-1/30">
+            <Server className="w-6 h-6 text-ascent-2 mr-3" />
+            <span className="text-sm font-mono text-mist">REST API</span>
+          </div>
+          <div className="h-8 w-px bg-gradient-to-b from-ascent-2 to-haze" />
+          <div className="w-full flex items-center justify-center p-4 liquid-glass rounded-lg border border-mist/10">
+            <GitMerge className="w-6 h-6 text-haze mr-3" />
+            <span className="text-sm font-mono text-mist">Spring AI</span>
+          </div>
+          <div className="h-8 w-px bg-gradient-to-b from-haze to-mist/20" />
+          <div className="w-full flex items-center justify-center p-4 liquid-glass rounded-lg border border-mist/10">
+            <Database className="w-6 h-6 text-haze mr-3" />
+            <span className="text-sm font-mono text-mist">PostgreSQL</span>
+          </div>
+        </>
+      );
+    }
+    if (projectName === "LatencyBook") {
+      return (
+        <>
+          <div className="w-full flex items-center justify-center p-4 liquid-glass rounded-lg border border-ascent-1/30">
+            <Cpu className="w-6 h-6 text-ascent-2 mr-3" />
+            <span className="text-sm font-mono text-mist">C++ Engine</span>
+          </div>
+          <div className="h-8 w-px bg-gradient-to-b from-ascent-2 to-haze" />
+          <div className="w-full flex items-center justify-center p-4 liquid-glass rounded-lg border border-mist/10">
+            <Activity className="w-6 h-6 text-haze mr-3" />
+            <span className="text-sm font-mono text-mist">Lock-Free SPSC</span>
+          </div>
+          <div className="h-8 w-px bg-gradient-to-b from-haze to-mist/20" />
+          <div className="w-full flex items-center justify-center p-4 liquid-glass rounded-lg border border-mist/10">
+            <Layers className="w-6 h-6 text-haze mr-3" />
+            <span className="text-sm font-mono text-mist">Huge Pages</span>
+          </div>
+        </>
+      );
+    }
+    if (projectName === "CodeMentor-PRO") {
+      return (
+        <>
+          <div className="w-full flex items-center justify-center p-4 liquid-glass rounded-lg border border-ascent-1/30">
+            <Layout className="w-6 h-6 text-ascent-2 mr-3" />
+            <span className="text-sm font-mono text-mist">Gradio UI</span>
+          </div>
+          <div className="h-8 w-px bg-gradient-to-b from-ascent-2 to-haze" />
+          <div className="w-full flex items-center justify-center p-4 liquid-glass rounded-lg border border-mist/10">
+            <Zap className="w-6 h-6 text-haze mr-3" />
+            <span className="text-sm font-mono text-mist">Groq LLM</span>
+          </div>
+          <div className="h-8 w-px bg-gradient-to-b from-haze to-mist/20" />
+          <div className="w-full flex items-center justify-center p-4 liquid-glass rounded-lg border border-mist/10">
+            <Database className="w-6 h-6 text-haze mr-3" />
+            <span className="text-sm font-mono text-mist">ChromaDB</span>
+          </div>
+        </>
+      );
+    }
+    return null;
+  };
 
   return (
     <section id="projects" className="py-24 max-w-[1120px] mx-auto px-4 md:px-8 overflow-hidden">
@@ -116,29 +180,12 @@ export function ProjectsCarousel() {
                         </div>
                       </div>
                       
-                      {/* Decorative Architecture Graphic for Flagship */}
+                      {/* Decorative Architecture Graphic */}
                       <div className="hidden lg:flex flex-col items-center justify-center p-8 bg-ink/50 rounded-xl border border-mist/5 relative overflow-hidden">
                         <div className="absolute inset-0 bg-[linear-gradient(to_right,#8891A31A_1px,transparent_1px),linear-gradient(to_bottom,#8891A31A_1px,transparent_1px)] bg-[size:14px_24px]" />
                         
                         <div className="relative z-10 flex flex-col items-center gap-6 w-full max-w-[240px]">
-                          <div className="w-full flex items-center justify-center p-4 liquid-glass rounded-lg border border-ascent-1/30">
-                            <Server className="w-6 h-6 text-ascent-2 mr-3" />
-                            <span className="text-sm font-mono text-mist">REST API</span>
-                          </div>
-                          
-                          <div className="h-8 w-px bg-gradient-to-b from-ascent-2 to-haze" />
-                          
-                          <div className="w-full flex items-center justify-center p-4 liquid-glass rounded-lg border border-mist/10">
-                            <GitMerge className="w-6 h-6 text-haze mr-3" />
-                            <span className="text-sm font-mono text-mist">Spring AI</span>
-                          </div>
-
-                          <div className="h-8 w-px bg-gradient-to-b from-haze to-mist/20" />
-
-                          <div className="w-full flex items-center justify-center p-4 liquid-glass rounded-lg border border-mist/10">
-                            <Database className="w-6 h-6 text-haze mr-3" />
-                            <span className="text-sm font-mono text-mist">PostgreSQL</span>
-                          </div>
+                          {renderDiagram(project.name)}
                         </div>
                       </div>
                     </div>

@@ -67,7 +67,7 @@ export const resume = {
       ],
       github: "https://github.com/Urvish2007", 
       demo: null,
-      flagship: false,
+      flagship: true,
     },
     {
       name: "CodeMentor-PRO",
@@ -79,7 +79,7 @@ export const resume = {
       ],
       github: "https://github.com/Urvish2007/CodeMentor-PRO-Adaptive-Code-Explainer", 
       demo: "https://huggingface.co/spaces/Urvxshhhhh0201/CodeMentor-PRO",
-      flagship: false,
+      flagship: true,
     },
   ],
 
