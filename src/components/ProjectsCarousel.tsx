@@ -1,53 +1,20 @@
 "use client";
-import React, { useState, useEffect, useCallback } from "react";
-import useEmblaCarousel from "embla-carousel-react";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { resume } from "@/data/resume";
 import { GlassPanel } from "./GlassPanel";
-import { ExternalLink, ChevronLeft, ChevronRight, Database, Server, GitMerge, Cpu, Activity, Layers, Layout, Zap } from "lucide-react";
+import { ExternalLink, Database, Server, GitMerge, Cpu, Activity, Layers, Layout, Zap } from "lucide-react";
 import { FaGithub as Github } from "react-icons/fa";
 import { cn } from "@/lib/utils";
-import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 
 export function ProjectsCarousel() {
-  const [emblaRef, emblaApi] = useEmblaCarousel(
-    {
-      align: "start",
-      loop: false,
-      skipSnaps: false,
-      dragFree: true,
-    },
-    [WheelGesturesPlugin({ forceWheelAxis: "y" })]
-  );
-  
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [canScrollPrev, setCanScrollPrev] = useState(false);
-  const [canScrollNext, setCanScrollNext] = useState(true);
+  const targetRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+  });
 
-  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
-  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
-
-  const onScroll = useCallback(() => {
-    if (!emblaApi) return;
-    const progress = Math.max(0, Math.min(1, emblaApi.scrollProgress()));
-    setScrollProgress(progress * 100);
-    setSelectedIndex(emblaApi.selectedScrollSnap());
-    setCanScrollPrev(emblaApi.canScrollPrev());
-    setCanScrollNext(emblaApi.canScrollNext());
-  }, [emblaApi]);
-
-  useEffect(() => {
-    if (!emblaApi) return;
-    onScroll();
-    emblaApi.on("scroll", onScroll);
-    emblaApi.on("select", onScroll);
-    emblaApi.on("reInit", onScroll);
-    return () => {
-      emblaApi.off("scroll", onScroll);
-      emblaApi.off("select", onScroll);
-      emblaApi.off("reInit", onScroll);
-    };
-  }, [emblaApi, onScroll]);
+  // Since we have 3 projects, we want to slide the container to the left by ~65-70% to reveal the last one.
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-68%"]);
 
   const renderDiagram = (projectName: string) => {
     if (projectName === "PharmaChain") {
@@ -114,40 +81,20 @@ export function ProjectsCarousel() {
   };
 
   return (
-    <section id="projects" className="py-24 max-w-[1120px] mx-auto px-4 md:px-8 overflow-hidden">
-      <div className="flex items-end justify-between mb-12">
-        <h2 className="font-display text-4xl text-mist font-medium tracking-tight">Selected Projects</h2>
-        
-        <div className="hidden md:flex items-center gap-4">
-          <button 
-            onClick={scrollPrev}
-            disabled={!canScrollPrev}
-            className="p-2 rounded-full border border-mist/10 text-mist disabled:opacity-30 hover:bg-mist/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ascent-1"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-          <button 
-            onClick={scrollNext}
-            disabled={!canScrollNext}
-            className="p-2 rounded-full border border-mist/10 text-mist disabled:opacity-30 hover:bg-mist/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ascent-1"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
+    <section id="projects" ref={targetRef} className="relative h-[300vh]">
+      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden py-12">
+        <div className="w-full max-w-[1120px] mx-auto px-4 md:px-8 mb-8 flex-shrink-0">
+          <h2 className="font-display text-4xl text-mist font-medium tracking-tight">Selected Projects</h2>
         </div>
-      </div>
 
-      <div className="relative">
-        <div className="overflow-hidden" ref={emblaRef}>
-          <div className="flex gap-6 pb-8 touch-pan-y">
+        <div className="relative w-full flex-1 flex items-center">
+          <motion.div style={{ x }} className="flex gap-8 px-4 md:px-8 w-[280vw] lg:w-[250vw]">
             {resume.projects.map((project, i) => (
               <div 
                 key={i} 
-                className={cn(
-                  "flex-none",
-                  project.flagship ? "w-full lg:w-[85%]" : "w-full md:w-[60%] lg:w-[45%]"
-                )}
+                className="flex-none w-[90vw] md:w-[85vw] lg:w-[80vw]"
               >
-                <GlassPanel elevated={selectedIndex === i} className="h-full p-6 md:p-10 flex flex-col">
+                <GlassPanel className="h-full p-6 md:p-10 flex flex-col">
                   {project.flagship ? (
                     <div className="grid lg:grid-cols-2 gap-10 h-full">
                       <div className="flex flex-col">
@@ -228,14 +175,14 @@ export function ProjectsCarousel() {
                 </GlassPanel>
               </div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
-        {/* Progress Bar */}
-        <div className="mt-8 h-1 w-full max-w-md mx-auto bg-mist/5 rounded-full overflow-hidden">
-          <div 
-            className="h-full bg-ascent-1 transition-all duration-150 ease-out" 
-            style={{ width: `${scrollProgress}%` }}
+        {/* Progress Bar (Now tied directly to window scroll) */}
+        <div className="mt-8 h-1 w-full max-w-md mx-auto bg-mist/5 rounded-full overflow-hidden flex-shrink-0">
+          <motion.div 
+            className="h-full bg-ascent-1 origin-left" 
+            style={{ scaleX: scrollYProgress }}
           />
         </div>
       </div>
